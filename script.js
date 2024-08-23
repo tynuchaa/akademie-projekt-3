@@ -60,7 +60,7 @@ window.addEventListener('scroll', () => {
     } else {
         header.classList.remove('shrinked');
     }
-    
+
     if (window.scrollY < 200) {
         toTop.classList.remove('show');
     } else {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* formulář */
 
-const formular = document.querySelector('form')
+const formular = document.querySelector('.form1')
 const emailCheck = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 const submitButton = document.querySelector('form button');
 const thankYouMessage = document.querySelector('#thankYouMessage');
@@ -190,8 +190,37 @@ prepinatko.addEventListener('click', () => {
         document.body.classList.remove('light-mode');
     } else {
         document.body.classList.add('light-mode');
-        
+
     }
 });
 
+/* kontrola hesla */
 
+const formular2 = document.querySelector('.form2');
+
+formular2.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', changeLabelStyle);
+    input.addEventListener('focus', changeLabelStyle);
+    input.addEventListener('blur', changeLabelStyle);
+    input.addEventListener('input', checkFormValidity);
+});
+
+const password1 = document.getElementById('password1');
+const password2 = document.getElementById('password2');
+const message = document.getElementById('message');
+
+function checkPasswords() {
+    if (password1.value === '' || password2.value === '') {
+        message.textContent = '';
+        message.style.color = ''; 
+    } else if (password1.value === password2.value) {
+        message.textContent = 'Hesla se shodují';
+        message.style.color = 'green';
+    } else {
+        message.textContent = 'Hesla se neshodují';
+        message.style.color = 'red';
+    }
+}
+
+password1.addEventListener('input', checkPasswords);
+password2.addEventListener('input', checkPasswords);
